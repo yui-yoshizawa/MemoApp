@@ -16,7 +16,7 @@ class ViewController: UIViewController, UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         // textView が UITextViewDelegate を使えるようにする
         textView.delegate = self
         
@@ -25,13 +25,27 @@ class ViewController: UIViewController, UITextViewDelegate {
         // AppDelegate に定義した lastText を参照し、 textView に格納する
         textView.text = appDelegate.lastText
     }
+    
+    // 削除ボタン
+    @IBAction func deleteButton(_ sender: Any) {
+        textView.text = ""
+        saveText()
+    }
+    
+    // TextView に何か入力されたら動作する
     func textViewDidChange(_ textView: UITextView) {
-        // AppDelegate を呼び出して変数に格納
+        saveText()
+    }
+    
+    /// 端末にデータを保存する
+    func saveText() {
+        // AppDelegate を呼び出して変数に格納する
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
-        // AppDelegate に記述した ""lastText" に入力されている内容を格納
+        // AppDelegate に記述した ""lastText" に入力されている内容を格納する
         appDelegate.lastText = textView.text
-    }
+        }
+    
 
 }
 
